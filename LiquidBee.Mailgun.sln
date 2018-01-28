@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiquidBee.Mailgun", "src\LiquidBee.Mailgun\LiquidBee.Mailgun.csproj", "{31C2C9BA-166F-4196-9A97-1C6189D813FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31C2C9BA-166F-4196-9A97-1C6189D813FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31C2C9BA-166F-4196-9A97-1C6189D813FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31C2C9BA-166F-4196-9A97-1C6189D813FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31C2C9BA-166F-4196-9A97-1C6189D813FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
