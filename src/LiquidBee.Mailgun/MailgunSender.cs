@@ -34,7 +34,7 @@ namespace LiquidBee.Mailgun
                 {new StringContent(html), "html"}
             };
 
-            var response = await _client.Send("message", content);
+            var response = await _client.Send("messages", content);
             
             _logger.LogInformation(response.ToString());
         }
