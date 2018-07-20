@@ -7,5 +7,7 @@
         public string Key { get; set; }
 
         public string From { get; set; }
+
+        public bool Debug { get; set; }
     }
 }
