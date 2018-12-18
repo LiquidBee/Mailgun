@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -18,27 +19,25 @@ namespace LiquidBee.Mailgun
             _options = options.Value;
         }
 
-        public async Task SendMessage(string to, string subject, string html, string from = null)
+        public async Task SendMessage(MailgunMessage message)
         {
-            if (to == null || subject == null || html == null)
-            {
-                _logger.LogError($"Send message argument is null! {to} : {subject} = {html}");
-                return;
-            }
-
             if (_options.Debug)
             {
-                _logger.LogDebug($"Mailgun debug mode: {to} {subject}");
+                _logger.LogDebug($"Mailgun debug mode: {message.To} {message.Subject}");
                 return;
             }
 
             var content = new MultipartFormDataContent
             {
-                {new StringContent(from ?? _options.From), "from"},
-                {new StringContent(to), "to"},
-                {new StringContent(subject), "subject"},
-                {new StringContent(html), "html"}
+                {new StringContent(message.From), "from"},
+                {new StringContent(string.Join(",", message.To)), "to"},
+                {new StringContent(message.Subject), "subject"},
+                {new StringContent(message.Html), "html"}
             };
+
+            if (message.Cc.Any()) content.Add(new StringContent(string.Join(",", message.Cc)), "cc");
+            if (message.Bcc.Any()) content.Add(new StringContent(string.Join(",", message.Bcc)), "bcc");
+            if (message.Attachments.Any()) message.Attachments.ForEach(stream => content.Add(stream, "attachment"));
 
             var response = await _client.Send("messages", content);
 
